@@ -16,7 +16,10 @@ public class ProtoTower : MonoBehaviour
     public float attackSpeed = 8.0f;
     public float attackCharge = 0.0f;
 
+    [Space]
+    [Header("Misc")]
     public GameObject mobTarget;
+    public bool isAttacking = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,14 +44,21 @@ public class ProtoTower : MonoBehaviour
 
     void OnTriggerEnter(Collider targetsInRange){
 
+        // Ignore Retargetting till initial 
+        // target is killed or left out of range
+        //if (isAttacking == false){
+  
+        //}
+
+    }
+
+    void OntriggerExit(Collider targetsInRange){
 
     }
 
     void EnemyInRange(){
         // Check for Mobs with attackrange components sphere collider
         //Colliders[] inColliders = m_AttackRangeColli();
-
-
 
     }
 
