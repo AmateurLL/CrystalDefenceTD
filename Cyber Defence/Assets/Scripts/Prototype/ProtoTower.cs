@@ -30,7 +30,7 @@ public class ProtoTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        DetectingEnemies();
     }
 
     void Attacking(){
@@ -42,24 +42,31 @@ public class ProtoTower : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider targetsInRange){
-
-        // Ignore Retargetting till initial 
-        // target is killed or left out of range
-        //if (isAttacking == false){
-  
-        //}
-
-    }
-
-    void OntriggerExit(Collider targetsInRange){
-
-    }
-
-    void EnemyInRange(){
+    void DetectingEnemies(){
         // Check for Mobs with attackrange components sphere collider
-        //Colliders[] inColliders = m_AttackRangeColli();
+        Collider[] detectedEnemies = Physics.OverlapSphere(this.transform.position, attackRange);
+        for(int i = 0; i < detectedEnemies.Length; i++){
+            // Run through list to find closest enemy to core
 
+            // Then assiagn to target
+            if(detectedEnemies[i].tag == "EnemyMob"){
+
+                // Implement Distance tracking for closest will implement other such as furthest later
+                // Refactor Target Locking toa place that runs once 
+                mobTarget = detectedEnemies[i].gameObject;
+                Debug.Log("Found Bug...");
+                
+            }
+            
+        }
     }
 
+    // Debug
+    void OnDrawGizmosSelected(){
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
 }
+
+
+
